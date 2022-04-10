@@ -19,5 +19,3 @@ jobs:
           git reset --hard develop
       - name: Create pull request
         uses: peter-evans/create-pull-request@v4
-        with:
-          branch: develop
