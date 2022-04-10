@@ -8,13 +8,18 @@ jobs:
   create-pull-request:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0
-
-      - name: Create Pull Request
+          ref: main
+      - name: Reset promotion branch
+        run: |
+          git fetch origin main:main
+          git reset --hard main
+      - name: Create pull request
         uses: peter-evans/create-pull-request@v4
         with:
           commit-message: release
-          branch: main
-          base: develop
+          branch: develop
+          base: main
