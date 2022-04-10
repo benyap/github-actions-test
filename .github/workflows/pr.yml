@@ -13,37 +13,13 @@ jobs:
         with:
           fetch-depth: 0
           ref: main
-
-      # - name: Get release version
-      #   uses: actions/github-script@v6
-      #   run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
-
-      - name: Get release version
-        uses: actions/github-script@v6
-        id: version
-        with:
-          script: |
-            const release = context.ref.substring(10)
-            const releaseType = release.replace(/^(\d+\.)+\d+-?/, "").replace(/\.\d+$/, "")
-            core.setOutput("release", release)
-            core.setOutput("releaseType", releaseType || "latest")
-
-      - name: Run test command
-        run: echo public --tag ${{ steps.version.outputs.releaseType }}
-
-      - name: Create promotion branch
+      - name: Reset promotion branch
         run: |
-          git checkout -B release/${{ steps.version.outputs.release }}
-          git push --set-upstream origin release/${{ steps.version.outputs.release }}
-          git fetch origin develop:develop
-          git reset --hard develop
-
+          git fetch origin main:main
+          git reset --hard main
       - name: Create pull request
         uses: peter-evans/create-pull-request@v4
         with:
+          commit-message: release
+          branch: develop
           base: main
-          branch: release/${{ steps.version.outputs.release }}
-          title: Release ${{ steps.version.outputs.release }}
-          body: |
-            Merge this PR to release ${{ steps.version.outputs.release }} to production.
-            Release type: ${{ steps.version.outputs.releaseType }}
