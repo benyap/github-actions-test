@@ -15,11 +15,9 @@ jobs:
           ref: main
       - name: Reset promotion branch
         run: |
-          git fetch origin main:main
-          git reset --hard main
+          git fetch origin develop:develop
+          git reset --hard develop
       - name: Create pull request
         uses: peter-evans/create-pull-request@v4
         with:
-          commit-message: release
           branch: develop
-          base: main
