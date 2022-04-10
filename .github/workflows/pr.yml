@@ -30,8 +30,8 @@ jobs:
 
       - name: Create promotion branch
         run: |
-          git checkout -B release/${{ steps.version.outputs.release }}
-          git push --set-upstream origin release/${{ steps.version.outputs.release }}
+          git checkout -B release/${{ env.RELEASE_VERSION }}
+          git push --set-upstream origin release/${{ env.RELEASE_VERSION }}
           git fetch origin develop:develop
           git reset --hard develop
 
