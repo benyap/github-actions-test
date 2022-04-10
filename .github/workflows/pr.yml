@@ -10,11 +10,11 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          ref: develop
           fetch-depth: 0
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v4
         with:
-          base: develop
+          commit-message: release
           branch: main
+          base: develop
