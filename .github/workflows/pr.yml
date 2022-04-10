@@ -8,13 +8,27 @@ jobs:
   create-pull-request:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0
+          ref: main
 
-      - name: Create Pull Request
+      - name: Get release version
+        run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+
+      - name: Create promotion branch
+        run: |
+          git checkout -B release/${{ env.RELEASE_VERSION }}
+          git push --set-upstream origin release/${{ env.RELEASE_VERSION }}
+
+      - name: Reset promotion branch
+        run: |
+          git fetch origin develop:develop
+          git reset --hard develop
+
+      - name: Create pull request
         uses: peter-evans/create-pull-request@v4
         with:
-          commit-message: release
-          branch: main
-          base: develop
+          branch: release/${{ env.RELEASE_VERSION }}
+          base: main
