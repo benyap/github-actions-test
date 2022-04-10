@@ -21,9 +21,6 @@ jobs:
         run: |
           git checkout -B release/${{ env.RELEASE_VERSION }}
           git push --set-upstream origin release/${{ env.RELEASE_VERSION }}
-
-      - name: Reset promotion branch
-        run: |
           git fetch origin develop:develop
           git reset --hard develop
 
