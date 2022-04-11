@@ -37,8 +37,9 @@ jobs:
         uses: peter-evans/create-pull-request@v4
         with:
           base: main
-          branch: release/${{ steps.version.outputs.tag }}
-          title: Release ${{ steps.version.outputs.tag }}
-          body: |
-            Merge this PR to release ${{ steps.version.outputs.tag }} to production.
+          branch: release/${{ env.RELEASE_VERSION }}
+          title: Release ${{ env.RELEASE_VERSION }}
+          body: Merge this PR to release ${{ env.RELEASE_VERSION }} to production.
+          labels: enhancement
           assignees: benyap
+          delete-branch: true
