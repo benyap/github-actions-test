@@ -44,4 +44,3 @@ jobs:
           body: |
             Merge this PR to release ${{ steps.version.outputs.release }} to production.
             Release type: ${{ steps.version.outputs.releaseType }}
-          assignees: benyap
