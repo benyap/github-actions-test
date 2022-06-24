@@ -28,8 +28,8 @@ jobs:
 
       - name: Create promotion branch
         run: |
-          git checkout -B release/${{ steps.version.tag }}
-          git push --set-upstream origin release/${{ steps.version.tag }}
+          git checkout -B release/${{ steps.version.outputs.tag }}
+          git push --set-upstream origin release/${{ steps.version.outputs.tag }}
           git fetch origin develop:develop
           git reset --hard develop
 
@@ -37,8 +37,8 @@ jobs:
         uses: peter-evans/create-pull-request@v4
         with:
           base: main
-          branch: release/${{ steps.version.tag }}
-          title: Release ${{ steps.version.tag }}
+          branch: release/${{ steps.version.outputs.tag }}
+          title: Release ${{ steps.version.outputs.tag }}
           body: |
-            Merge this PR to release ${{ steps.version.tag }} to production.
+            Merge this PR to release ${{ steps.version.outputs.tag }} to production.
           assignees: benyap
