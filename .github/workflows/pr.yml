@@ -2,7 +2,7 @@ name: Release pull request
 
 on:
   release:
-    types: [published]
+    types: [release, prereleased]
 
 jobs:
   create-pull-request:
@@ -23,13 +23,15 @@ jobs:
         id: version
         with:
           script: |
-            const tag = context.ref.substring(10)
-            core.setOutput("tag", tag)
+            const release = context.ref.substring(10)
+            const releaseType = release.replace(/^(\d+\.)+\d+-/, "").replace(/\.\d+$/, "")
+            core.setOutput("release", release)
+            core.setOutput("releaseType", releaseType)
 
       - name: Create promotion branch
         run: |
-          git checkout -B release/${{ steps.version.outputs.tag }}
-          git push --set-upstream origin release/${{ steps.version.outputs.tag }}
+          git checkout -B release/${{ steps.version.outputs.release }}
+          git push --set-upstream origin release/${{ steps.version.outputs.release }}
           git fetch origin develop:develop
           git reset --hard develop
 
@@ -37,8 +39,8 @@ jobs:
         uses: peter-evans/create-pull-request@v4
         with:
           base: main
-          branch: release/${{ steps.version.outputs.tag }}
-          title: Release ${{ steps.version.outputs.tag }}
+          branch: release/${{ steps.version.outputs.release }}
+          title: Release ${{ steps.version.outputs.release }}
           body: |
-            Merge this PR to release ${{ steps.version.outputs.tag }} to production.
-          assignees: benyap
+            Merge this PR to release ${{ steps.version.outputs.release }} to production.
+            Release type: ${{ steps.version.outputs.releaseType }}
