@@ -35,4 +35,3 @@ jobs:
           body: Merge this PR to release ${{ env.RELEASE_VERSION }} to production.
           labels: enhancement
           assignees: benyap
-          delete-branch: true
