@@ -19,12 +19,9 @@ jobs:
       #   run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
 
       - name: Get release version
-        uses: actions/github-script@v6
-        id: version
-        with:
-          script: |
-            const tag = context.ref.substring(10)
-            core.setOutput("tag", tag)
+        run: |
+          echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+          echo ${{ env.RELEASE_VERSION }}
 
       - name: Create promotion branch
         run: |
@@ -42,4 +39,3 @@ jobs:
           body: Merge this PR to release ${{ env.RELEASE_VERSION }} to production.
           labels: enhancement
           assignees: benyap
-          delete-branch: true
