@@ -2,7 +2,7 @@ name: Release pull request
 
 on:
   release:
-    types: [release, prereleased]
+    types: [released, prereleased]
 
 jobs:
   create-pull-request:
