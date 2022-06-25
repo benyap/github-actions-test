@@ -2,11 +2,12 @@
   "name": "github-actions-test",
   "private": true,
   "license": "MIT",
-  "version": "0.17.4",
+  "version": "0.17.7",
   "scripts": {
     "release": "release-it"
   },
   "dependencies": {
+    "@release-it/conventional-changelog": "^5.0.0",
     "release-it": "15.1.0"
   }
 }
