@@ -1,4 +1,11 @@
+# Changelog
 
+### [0.17.7](https://github.com/benyap/github-actions-test/compare/0.17.6...0.17.7) (2022-06-25)
+
+
+### Internal
+
+* update release-it config ([afe9aa0](https://github.com/benyap/github-actions-test/commit/afe9aa0c5f5fd3b65174a46f79a7716dab03e301))
 
 ### [0.17.6](https://github.com/benyap/github-actions-test/compare/0.17.5...0.17.6) (2022-06-25)
 
