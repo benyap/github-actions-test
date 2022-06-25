@@ -37,7 +37,7 @@ jobs:
 
       - name: Create release branch
         run: |
-          git checkout -B release/${{ steps.version.outptus.release }}
+          git checkout -B release/${{ steps.version.outputs.release }}
           git push --set-upstream origin release/${{ steps.version.outputs.release }}
 
       # - name: Create pull request
