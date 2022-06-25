@@ -35,8 +35,8 @@ jobs:
         run: |
           git checkout -B release/${{ steps.version.outputs.release }}
           git push --set-upstream origin release/${{ steps.version.outputs.release }}
-          git fetch origin main:main
-          git reset --hard main
+          git fetch origin main:develop
+          git reset --hard develop
 
       - name: Create pull request
         uses: peter-evans/create-pull-request@v4
