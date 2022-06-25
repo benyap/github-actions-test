@@ -41,7 +41,7 @@ jobs:
       - name: Create pull request
         uses: peter-evans/create-pull-request@v4
         with:
-          base: main
+          base: develop
           branch: release/${{ steps.version.outputs.release }}
           title: Release ${{ steps.version.outputs.release }}
           body: |
