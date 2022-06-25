@@ -1,5 +1,12 @@
 # Changelog
 
+### [0.17.8](https://github.com/benyap/github-actions-test/compare/0.17.7...0.17.8) (2022-06-25)
+
+
+### Internal
+
+* update README, clean up ([4683dd8](https://github.com/benyap/github-actions-test/commit/4683dd8023a6366891b248b93281696c04255e8a))
+
 ### [0.17.7](https://github.com/benyap/github-actions-test/compare/0.17.6...0.17.7) (2022-06-25)
 
 
