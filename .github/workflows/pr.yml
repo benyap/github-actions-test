@@ -10,8 +10,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-        # with:
-        #   fetch-depth: 0
+        with:
+          fetch-depth: 0
         #   ref: develop
 
       # - name: Get release version
@@ -35,19 +35,37 @@ jobs:
       - name: Run test command
         run: echo public --tag ${{ steps.version.outputs.releaseType }}
 
-      - name: Sync develop branch
+      - name: Create release branch
         run: |
-          git fetch origin develop:develop
-          git reset --hard develop
+          git checkout -B release/${{ steps.version.outptus.release }}
+          git push --set-upstream origin release/${{ steps.version.outputs.release }}
+
+      # - name: Create pull request
+      #   uses: peter-evans/create-pull-request@v4
+      #   with:
+      #     base: main
+      #     branch: release/${{ steps.version.outputs.release }}
+      #     title: Release ${{ steps.version.outputs.release }}
+      #     body: |
+      #       Merge this PR to release ${{ steps.version.outputs.release }} to production.
+
+      #       **Release version:** ${{ steps.version.outputs.release }}
+      #       **Release type:** ${{ steps.version.outputs.releaseType }}
 
       - name: Create pull request
-        uses: peter-evans/create-pull-request@v4
+        uses: devops-infra/action-pull-request@0.4.2
         with:
-          base: main
-          branch: release/${{ steps.version.outputs.release }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          source_branch: release/${{ steps.version.outputs.release }}
+          target_branch: main
+          get_diff: true
           title: Release ${{ steps.version.outputs.release }}
           body: |
             Merge this PR to release ${{ steps.version.outputs.release }} to production.
 
             **Release version:** ${{ steps.version.outputs.release }}
             **Release type:** ${{ steps.version.outputs.releaseType }}
+
+            ### Commits
+            <!-- Diff commits - START -->
+            <!-- Diff commits - END -->
