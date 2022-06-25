@@ -8,7 +8,6 @@ on:
 jobs:
   merge-main-to-dev:
     if: github.event.pull_request.merged == true
-    timeout-minutes: 2
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -19,5 +18,5 @@ jobs:
           git fetch --unshallow
           git checkout develop
           git pull
-          git merge --no-ff main -m "chore: merge main back into develop"
+          git merge --no-ff main -m "Merge main back into develop"
           git push

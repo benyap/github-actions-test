@@ -40,18 +40,6 @@ jobs:
           git checkout -B release/${{ steps.version.outputs.release }}
           git push --set-upstream origin release/${{ steps.version.outputs.release }}
 
-      # - name: Create pull request
-      #   uses: peter-evans/create-pull-request@v4
-      #   with:
-      #     base: main
-      #     branch: release/${{ steps.version.outputs.release }}
-      #     title: Release ${{ steps.version.outputs.release }}
-      #     body: |
-      #       Merge this PR to release ${{ steps.version.outputs.release }} to production.
-
-      #       **Release version:** ${{ steps.version.outputs.release }}
-      #       **Release type:** ${{ steps.version.outputs.releaseType }}
-
       - name: Create pull request
         uses: devops-infra/action-pull-request@v0.4.2
         with:
@@ -61,6 +49,7 @@ jobs:
           get_diff: true
           title: Release ${{ steps.version.outputs.release }}
           body: |
+            ### Summary
             Merge this PR to release ${{ steps.version.outputs.release }} to production.
 
             **Release version:** ${{ steps.version.outputs.release }}
