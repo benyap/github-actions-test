@@ -10,9 +10,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-          ref: develop
+        # with:
+        #   fetch-depth: 0
+        #   ref: develop
 
       # - name: Get release version
       #   uses: actions/github-script@v6
@@ -49,4 +49,6 @@ jobs:
           title: Release ${{ steps.version.outputs.release }}
           body: |
             Merge this PR to release ${{ steps.version.outputs.release }} to production.
-            Release type: ${{ steps.version.outputs.releaseType }}
+
+            **Release version:** ${{ steps.version.outputs.release }}
+            **Release type:** ${{ steps.version.outputs.releaseType }}
