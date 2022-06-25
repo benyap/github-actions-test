@@ -29,8 +29,7 @@ jobs:
             core.setOutput("releaseType", releaseType || "latest")
 
       - name: Run test command
-        with:
-          script: echo public --tag ${{ steps.version.outputs.releaseType }}
+        run: echo public --tag ${{ steps.version.outputs.releaseType }}
 
       - name: Create promotion branch
         run: |
