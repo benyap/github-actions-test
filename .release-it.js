@@ -9,7 +9,7 @@ module.exports = {
   git: {
     tag: true,
     commit: true,
-    commitMessage: "release: ${version}",
+    commitMessage: "release: release ${version}",
   },
   plugins: {
     "@release-it/conventional-changelog": {
