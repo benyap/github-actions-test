@@ -2,7 +2,7 @@ name: Release pull request
 
 on:
   release:
-    types: [release, prereleased]
+    types: [released, prereleased]
 
 jobs:
   create-pull-request:
@@ -24,9 +24,9 @@ jobs:
         with:
           script: |
             const release = context.ref.substring(10)
-            const releaseType = release.replace(/^(\d+\.)+\d+-/, "").replace(/\.\d+$/, "")
+            const releaseType = release.replace(/^(\d+\.)+\d+-?/, "").replace(/\.\d+$/, "")
             core.setOutput("release", release)
-            core.setOutput("releaseType", releaseType)
+            core.setOutput("releaseType", releaseType || "latest")
 
       - name: Create promotion branch
         run: |
