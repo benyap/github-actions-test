@@ -2,7 +2,7 @@
   "name": "github-actions-test",
   "private": true,
   "license": "MIT",
-  "version": "0.17.8",
+  "version": "0.17.9",
   "scripts": {
     "release": "release-it"
   },
