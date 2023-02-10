@@ -1,5 +1,12 @@
 # Changelog
 
+### [0.17.9](https://github.com/benyap/github-actions-test/compare/0.17.8...0.17.9) (2023-02-10)
+
+
+### Internal
+
+* debug workflow ([a78f995](https://github.com/benyap/github-actions-test/commit/a78f9957c07461fcf063674b367458cb3d01a8d6))
+
 ### [0.17.8](https://github.com/benyap/github-actions-test/compare/0.17.7...0.17.8) (2022-06-25)
 
 
